@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
+global.TempCateg = [];
+
 const main_api_R = require('./routers/main_api_R');
 app.use('/api', main_api_R);
 

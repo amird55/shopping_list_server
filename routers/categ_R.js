@@ -13,6 +13,11 @@ router.get("/Add", [], (req, res) => {
 
 router.post("/Create", [], (req, res) => {
     const {name} = req.body;
+    TempCateg.push(name);
     res.status(200).json({message:"created",name:name});
 });
+router.get("/List",[],(req,res)=>{
+    res.status(200).json(TempCateg);
+});
+
 
