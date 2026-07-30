@@ -11,3 +11,7 @@ router.get("/Add", [], (req, res) => {
     //     return res.status(500).json({message: res.err});
 });
 
+router.post("/Create", [], (req, res) => {
+    res.status(200).json({message:"created"});
+});
+
