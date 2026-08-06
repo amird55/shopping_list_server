@@ -12,6 +12,7 @@ router.get("/Add", [], (req, res) => {
 });
 
 router.post("/Create", [], (req, res) => {
+    //INSERT INTO `categories`(`id`, `name`) VALUES ('[value-1]','[value-2]')
     const {name} = req.body;
     TempCateg.push(name);
     res.status(200).json({message:"created",name:name});
