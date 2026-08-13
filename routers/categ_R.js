@@ -11,7 +11,7 @@ router.get("/Add", [], (req, res) => {
     //     return res.status(500).json({message: res.err});
 });
 
-router.post("/Create", [], async (req, res) => {
+router.post("/", [], async (req, res) => {
     const {name} = req.body;
 
     let Query = "INSERT INTO `categories`( `name`) VALUES (?)"
@@ -26,8 +26,45 @@ router.post("/Create", [], async (req, res) => {
         return res.status(500).json({message: err});
     }
 });
-router.get("/List",[],(req,res)=>{
-    res.status(200).json(TempCateg);
+router.get("/",[],async (req,res)=>{
+    let Query = "SELECT * FROM `categories`"
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query);
+        res.status(200).json(rows);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: err});
+    }
+});
+router.put("/",[],async (req,res)=>{
+    const {id,name} = req.body;
+    let Query = "UPDATE `categories` SET `name` = ? WHERE `id` =?"
+    const promisePool = db_pool.promise();
+    let vv = [name,id];
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query,vv);
+        res.status(200).json({message:"OK"});
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: err});
+    }
+});
+router.delete("/",[],async (req,res)=>{
+    const {id} = req.body;
+    let Query = "DELETE FROM `categories` WHERE `id` = ?"
+    let vv = [id];
+    const promisePool = db_pool.promise();
+    let rows=[];
+    try {
+        [rows] = await promisePool.query(Query,vv);
+        res.status(200).json({message:"OK"});
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: err});
+    }
 });
 
 
