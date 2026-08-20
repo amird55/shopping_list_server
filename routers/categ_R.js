@@ -16,33 +16,17 @@ router.get("/",[categ_M.GetList], (req,res)=>{
     else
         res.status(500).json({message: "error"});
 });
-router.put("/",[],async (req,res)=>{
-    const {id,name} = req.body;
-    let Query = "UPDATE `categories` SET `name` = ? WHERE `id` =?"
-    const promisePool = db_pool.promise();
-    let vv = [name,id];
-    let rows=[];
-    try {
-        [rows] = await promisePool.query(Query,vv);
-        res.status(200).json({message:"OK"});
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({message: err});
-    }
+router.put("/",[categ_M.UpdateCateg],async (req,res)=>{
+    if (req.ok)
+        res.status(200).json(req.msg);
+    else
+        res.status(500).json({message: "error"});
 });
-router.delete("/",[],async (req,res)=>{
-    const {id} = req.body;
-    let Query = "DELETE FROM `categories` WHERE `id` = ?"
-    let vv = [id];
-    const promisePool = db_pool.promise();
-    let rows=[];
-    try {
-        [rows] = await promisePool.query(Query,vv);
-        res.status(200).json({message:"OK"});
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({message: err});
-    }
+router.delete("/",[categ_M.DeleteCateg],async (req,res)=>{
+    if (req.ok)
+        res.status(200).json(req.msg);
+    else
+        res.status(500).json({message: "error"});
 });
 
 
