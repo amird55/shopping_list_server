@@ -16,7 +16,7 @@ global.db_pool = db_M.pool;
 global.TempCateg = [];
 
 const main_api_R = require('./routers/main_api_R');
-app.use('/api', main_api_R);
+app.use('/api', [],main_api_R);
 
 app.use('/hello', (req, res, next) => {
     res.sendFile(path.resolve(__dirname, 'public/html', 'welcome.html'));

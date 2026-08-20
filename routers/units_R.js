@@ -2,27 +2,27 @@ const express = require('express');
 const router = express.Router();
 module.exports = router;
 
-const categ_M = require('../Middleware/categ_Mid');
+const unit_M = require('../Middleware/units_Mid');
 
-router.post("/", [categ_M.AddCateg],  (req, res) => {
+router.post("/", [unit_M.AddUnit],  (req, res) => {
     if (req.ok)
         res.status(200).json(req.data);
     else
         res.status(500).json({message: "error"});
 });
-router.get("/",[categ_M.GetList], (req,res)=>{
+router.get("/",[unit_M.GetList], (req,res)=>{
     if (req.ok)
-        res.status(200).json(req.categ);
+        res.status(200).json(req.unit);
     else
         res.status(500).json({message: "error"});
 });
-router.put("/",[categ_M.UpdateCateg], (req,res)=>{
+router.put("/",[unit_M.UpdateUnit], (req,res)=>{
     if (req.ok)
         res.status(200).json(req.msg);
     else
         res.status(500).json({message: "error"});
 });
-router.delete("/",[categ_M.DeleteCateg], (req,res)=>{
+router.delete("/",[unit_M.DeleteUnit], (req,res)=>{
     if (req.ok)
         res.status(200).json(req.msg);
     else
