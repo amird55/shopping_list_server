@@ -10,17 +10,11 @@ router.post("/", [categ_M.AddCateg],  (req, res) => {
     else
         res.status(500).json({message: "error"});
 });
-router.get("/",[],async (req,res)=>{
-    let Query = "SELECT * FROM `categories`"
-    const promisePool = db_pool.promise();
-    let rows=[];
-    try {
-        [rows] = await promisePool.query(Query);
-        res.status(200).json(rows);
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({message: err});
-    }
+router.get("/",[categ_M.GetList], (req,res)=>{
+    if (req.ok)
+        res.status(200).json(req.categ);
+    else
+        res.status(500).json({message: "error"});
 });
 router.put("/",[],async (req,res)=>{
     const {id,name} = req.body;
