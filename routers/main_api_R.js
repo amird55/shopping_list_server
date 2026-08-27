@@ -6,3 +6,5 @@ const categ_R = require('./categ_R');
 router.use('/CTG',[],categ_R);
 const units_R = require('./units_R');
 router.use('/UNT',[],units_R);
+const products_R = require('./products_R');
+router.use('/PRD',[],products_R);
